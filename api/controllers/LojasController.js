@@ -24,6 +24,7 @@ module.exports = class LojasController {
       res.status(500).json({
         error: error.message,
       });
+      console.log(error);
     }
   }
 };

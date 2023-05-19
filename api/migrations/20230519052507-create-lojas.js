@@ -14,6 +14,7 @@ module.exports = {
       },
       cpf_cnpj: {
         type: Sequelize.STRING(14),
+        unique: true,
       },
       tipo_id: {
         type: Sequelize.INTEGER,

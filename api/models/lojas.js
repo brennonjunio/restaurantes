@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   lojas.init(
     {
       descricao: DataTypes.STRING(250),
-      cpf_cnpj: DataTypes.STRING(14),
+      cpf_cnpj: {
+        type: DataTypes.STRING(14),
+        unique: true,
+      },
       tipo_id: DataTypes.INTEGER,
     },
     {
