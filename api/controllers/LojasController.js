@@ -27,4 +27,49 @@ module.exports = class LojasController {
       console.log(error);
     }
   }
+  static async index(req, res) {
+    try {
+      const lista = await lojas.findAll({});
+      res.json(lista);
+    } catch (error) {}
+  }
+  static async delete(req, res) {
+    try {
+      const { id } = req.params;
+      const loja = await lojas.findOne({
+        where: {
+          id: id,
+        },
+      });
+      await loja.destroy();
+      res.json({
+        success: true,
+      });
+    } catch (error) {
+      res.status(500).json({
+        error: error.message,
+      });
+    }
+  }
+  static async update(req, res) {
+    try {
+      const { id } = req.params;
+      const loja = await lojas.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      await loja.update({
+        descricao: req.body.descricao,
+        cpf_cnpj: req.body.cpf_cnpj,
+        tipo_id: req.body.tipo_id,
+      });
+      res.json(loja);
+    } catch (error) {
+      res.status(500).json({
+        error: error.message,
+      });
+    }
+  }
 };
