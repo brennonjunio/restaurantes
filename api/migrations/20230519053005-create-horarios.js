@@ -15,19 +15,14 @@ module.exports = {
       horaIni: {
         type: Sequelize.TIME,
       },
-      horaFim: {
+      interIni: {
         type: Sequelize.TIME,
       },
-      loja_id: {
-        type: Sequelize.INTEGER,
+      interFim: {
+        type: Sequelize.TIME,
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
+      horaFim: {
+        type: Sequelize.TIME,
       },
     });
   },

@@ -1,24 +1,17 @@
-const { lojas } = require("../models");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-
+const { lojas, tipos } = require("../models");
 module.exports = class LojasController {
   static async store(req, res) {
     try {
-      const salt = await bcrypt.genSalt(12);
-      const senha = await bcrypt.hash(req.body.senha, salt);
       const loja = await lojas.create({
         descricao: req.body.descricao,
         cpf_cnpj: req.body.cpf_cnpj,
         tipo_id: req.body.tipo_id,
-        senha: senha,
       });
       res.json({
         id: loja.id,
         descricao: loja.descricao,
         cpf_cnpj: loja.cpf_cnpj,
         tipo_id: loja.tipo_id,
-        senha: loja.senha,
       });
     } catch (error) {
       res.status(500).json({
@@ -29,9 +22,21 @@ module.exports = class LojasController {
   }
   static async index(req, res) {
     try {
-      const lista = await lojas.findAll({});
+      const lista = await lojas.findAll({
+        include: [
+          {
+            model: tipos,
+            as: "tipo",
+            attributes: ["descricao"],
+          },
+        ],
+      });
       res.json(lista);
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json({
+        error: error.messaage,
+      });
+    }
   }
   static async delete(req, res) {
     try {
@@ -70,6 +75,7 @@ module.exports = class LojasController {
       res.status(500).json({
         error: error.message,
       });
+      console.log(error);
     }
   }
 };

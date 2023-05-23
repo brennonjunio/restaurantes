@@ -15,8 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       diaSemana: DataTypes.STRING(100),
       horaIni: DataTypes.TIME,
+      interIni: DataTypes.TIME,
+      interFim: DataTypes.TIME,
       horaFim: DataTypes.TIME,
-      loja_id: DataTypes.INTEGER,
     },
     {
       sequelize,
