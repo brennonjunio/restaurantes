@@ -55,10 +55,11 @@ const Navegacao = () => {
             >
               <Box sx={{ width: 250 }}>
                 <List>
+                  <ItemDaLista texto="Home" icone={<MenuIcon />} link="/" />
                   <ItemDaLista
                     texto="Restaurantes"
                     icone={<RestaurantIcon />}
-                    link="/"
+                    link="/restaurantes"
                   />
                   <ItemDaLista
                     texto="Sobre"
